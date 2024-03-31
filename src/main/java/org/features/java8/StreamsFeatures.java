@@ -3,6 +3,7 @@ package org.features.java8;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -49,6 +50,26 @@ public class StreamsFeatures {
         List<String> peek = lst.stream()
                 .peek(str -> System.out.println(str.charAt(0)))//perform an operation on each of the elements in the list
                 .toList();//the stream is not closed yet and you can perform any streams operation on it.
+
+        //sorted method to sort a list
+        List<String> sorted = lst.stream().sorted((s1, s2) -> s1.compareTo(s2)).collect(Collectors.toList());
+        System.out.println("sorted :" + sorted);
+
+        //min - find out the minimum from a list
+        List<Integer> intList = Arrays.asList(1, 2, 4, 8, 9, 7, 15, 14, 23, 52, 14);
+        int min = intList.stream().min((i1,i2) -> i1 - i2)
+                .orElseThrow(NoSuchElementException::new);
+        System.out.println("min :- " + min);
+
+//        max - find out the max from a list
+        int max = intList.stream().max((i1, i2) -> i1 - i2).orElseThrow(NoSuchElementException::new);
+        System.out.println("max: " + max);
+
+//        distinct - irons out duplicates from the list. If the elements are objects then, they should implement the equals method,
+//        as distinct uses the equals method for identifying equal objects.
+        List<Integer> duplicateList = Arrays.asList(1, 1, 5, 4, 8, 9, 12, 12, 54, 23, 12, 5, 85, 41, 25, 1, 2, 6, 7, 8, 12);
+        List<Integer> distinctList = duplicateList.stream().distinct().sorted(Integer::compareTo).toList();
+        System.out.println("distinct " + distinctList);
 
 
     }
