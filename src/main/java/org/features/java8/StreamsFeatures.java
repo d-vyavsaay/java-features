@@ -14,7 +14,7 @@ public class StreamsFeatures {
         List<String> lst = Arrays.asList("deepak", "deepanshu","deepankar","suhasini");
 
 //        foreach - simple iteration , however note that this is a terminal operation, i.e it does not return a stream, it closes the stream
-        lst.forEach(str -> System.out.println(str));
+        lst.forEach(System.out::println);
 
 //        filter
         List<String> deep = lst.stream().filter(s -> s.contains("deep")).collect(Collectors.toList());
@@ -33,7 +33,7 @@ public class StreamsFeatures {
 
 //        converting a stream to an array
         Object[] array = lst.toArray();//here we might have to use a cast
-        String[] stringArray = lst.stream().toArray(String[]::new); // without a cast
+        String[] stringArray = lst.toArray(String[]::new); // without a cast
 
 //        flatmap - flattens data structures with higher dimensions. ref:- https://www.geeksforgeeks.org/stream-flatmap-java-examples/
         Stream<List<String>> nameStream = Stream.of(
@@ -50,6 +50,6 @@ public class StreamsFeatures {
                 .peek(str -> System.out.println(str.charAt(0)))//perform an operation on each of the elements in the list
                 .toList();//the stream is not closed yet and you can perform any streams operation on it.
 
-        
+
     }
 }
